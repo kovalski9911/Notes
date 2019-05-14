@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% for category in category_list %}
+        {{ category }}
+        <a href="{% url 'note_app:category-delete' category.pk %}">Delete</a>
+        {% block update %}
+        {% endblock %}
+        <br>
+    {% endfor %}
+    <br>
+    <p>Create Category</p>
+    <form action="" method="post">
+      {% csrf_token %}
+      {{ form }}
+      <button type="submit">Create Category</button>
+    </form>
+</body>
+</html>
