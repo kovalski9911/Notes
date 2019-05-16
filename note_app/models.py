@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from tinymce import HTMLField
 
 
 
@@ -21,7 +22,7 @@ class Note(models.Model):
     """Model of note"""
 
     name = models.CharField('note name', max_length=100)
-    content = models.TextField('note content')
+    content = HTMLField('Content')
     category = models.ManyToManyField(Category)
     created = models.DateTimeField(auto_now_add=True)
     # author = models.ForeignKey(User, on_delete=models.CASCADE)

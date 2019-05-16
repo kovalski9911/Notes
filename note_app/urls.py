@@ -8,6 +8,8 @@ urlpatterns = [
     path('category/', CategoryNoteListView.as_view(), name='category-list'),
     path('category/create', CategoryCreateView.as_view(), name='category-create'),
     path('category/<int:pk>/delete', category_delete, name='category-delete'),
-    path('category/<int:category_pk>', CategoryNoteListView.as_view(), name='notes-of-category-list'),
+    path('category/<int:category_pk>',
+         CategoryNoteListView.as_view(),
+         name='notes-of-category-list'),
     path('notes/<int:pk>/delete', note_delete, name='note-delete'),
 ]

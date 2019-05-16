@@ -1,38 +1,46 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 
+    {{ form.media }}
     <a href="{% url 'users:logout' %}">Logout</a>
     <div class="row">
 
         <div class="col-md-4 border-right pt-3 pb-2">
-            <p>Create Note</p>
+            <h3 class="pb-3">Create Note</h3>
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {{ form|crispy }}
                 <button type="submit">Create</button>
             </form>
         </div>
 
-        <div class="col-md-4 border-right pt-3 pb-2">
+        <div class="col-md-4 border-right pt-3">
+            <h3 class="pb-3">Note List</h3>
             {% for note in notes %}
-                {{ note.content }}
+                <h5 class="article-title">{{ note.name }}</h5>
+                <small class="text-muted">{{ note.created|date:"F d, Y" }}</small>
+                <p>{{ note.content|safe }}</p>
                 <a href="{% url 'note_app:note-delete' note.pk %}">delete</a>
-                <br>
+                <p class="border-bottom">
             {% endfor %}
         </div>
-
 
         <div class="col-md-4 pt-3 pb-2">
-            <a href="{% url 'note_app:category-create'%}">Create Category</a>
-            <br>
-            {% for category in category_list %}
-
-                <a href="{% url 'note_app:notes-of-category-list' category.pk %}">{{ category }}</a>
-                <a href="{% url 'note_app:category-delete' category.pk %}">delete</a>
-                <br>
-            {% endfor %}
+            <a class="h3 " href="{% url 'note_app:category-create'%}">Create Category</a>
+            <div class="pt-3">
+                {% for category in category_list %}
+                    <a class="h4" href="{% url 'note_app:notes-of-category-list' category.pk %}">{{ category }}</a>
+                    <div class="align-right">
+                        <a class="align-right" href="{% url 'note_app:category-delete' category.pk %}">delete category</a>
+                    <div>
+                    <br>
+                {% endfor %}
+            </div>
         </div>
+
     </div>
 
 {% endblock %}

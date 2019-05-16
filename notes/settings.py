@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'crispy_forms',
+    'tinymce',
+
     'users',
     'note_app',
 ]
@@ -136,3 +139,35 @@ AUTH_USER_MODEL = 'users.User'
 LOGIN_REDIRECT_URL = reverse_lazy('note_app:category-list')
 
 LOGIN_URL = reverse_lazy('users:login')
+
+TINYMCE_DEFAULT_CONFIG = {
+    'height': 150,
+    'width': 350,
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 20,
+    'selector': 'textarea',
+    'theme': 'modern',
+    'plugins': '''
+            textcolor save link image media preview codesample contextmenu
+            table code lists fullscreen  insertdatetime  nonbreaking
+            contextmenu directionality searchreplace wordcount visualblocks
+            visualchars code fullscreen autolink lists  charmap print  hr
+            anchor pagebreak
+            ''',
+    'toolbar1': '''
+            fullscreen preview bold italic underline | fontselect,
+            fontsizeselect  | forecolor backcolor | alignleft alignright |
+            aligncenter alignjustify | indent outdent | bullist numlist table |
+            | link image media | codesample |
+            ''',
+    'toolbar2': '''
+            visualblocks visualchars |
+            charmap hr pagebreak nonbreaking anchor |  code |
+            ''',
+    'contextmenu': 'formats | link image',
+    'menubar': True,
+    'statusbar': True,
+    }
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
