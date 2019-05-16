@@ -3,7 +3,6 @@ from django.contrib.auth import get_user_model
 from tinymce import HTMLField
 
 
-
 User = get_user_model()
 
 
