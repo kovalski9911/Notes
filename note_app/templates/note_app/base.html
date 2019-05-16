@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
+{% block content %}
+    <a href="{% url 'users:logout' %}">Logout</a>
     <a href="{% url 'note_app:category-create'%}">Create Category</a>
     <br>
     {% for category in category_list %}
@@ -16,17 +12,16 @@
     {% endfor %}
     <br>
     {% for note in notes %}
-        {{ note }}
+        {{ note.content }}
         <a href="{% url 'note_app:note-delete' note.pk %}">delete</a>
         <br>
     {% endfor %}
 
     <p>Create Note</p>
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Create</button>
     </form>
 
-</body>
-</html>
+{% endblock %}

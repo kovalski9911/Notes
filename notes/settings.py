@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from django.urls import reverse_lazy
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -50,6 +52,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+
 ]
 
 ROOT_URLCONF = 'notes.urls'
@@ -129,4 +133,6 @@ STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'users.User'
 
-# LOGIN_REDIRECT_URL = ''
+LOGIN_REDIRECT_URL = reverse_lazy('note_app:category-list')
+
+LOGIN_URL = reverse_lazy('users:login')
