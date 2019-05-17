@@ -16,6 +16,7 @@ class CategoryNoteListView(LoginRequiredMixin, CreateView):
     """Class for Note list, Categories list and for create note"""
     model = Note
     template_name = 'note_app/home.html'
+    success_url = reverse_lazy('note_app:category-list')
 
     def get_context_data(self, *args, **kwargs):
         context = super(CategoryNoteListView, self).get_context_data(*args, **kwargs)
@@ -44,10 +45,6 @@ class CategoryNoteListView(LoginRequiredMixin, CreateView):
             user = self.request.user
             my_form.fields['category'].queryset = Category.objects.filter(author=user)
             return my_form
-
-    def get_success_url(self):
-        category = get_object_or_404(Category, id=self.kwargs.get('category_pk'))
-        return reverse_lazy('note_app:notes-of-category-list', kwargs={'category_pk': category.pk})
 
 
 class CategoryCreateView(LoginRequiredMixin, CreateView):
